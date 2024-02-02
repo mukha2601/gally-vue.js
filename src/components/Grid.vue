@@ -1,41 +1,51 @@
 <template>
+  <Modal v-if="showModal" :image="image" @closeModal="showModal = false" />
   <div class="grid">
     <div v-for="image in images" class="imaage-box">
-      <img :src="image.urls.small" alt="" class="image" />
+      <img
+        :src="image.urls.small"
+        alt=""
+        :key="image.id"
+        class="image"
+        @click="toModal(image)"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
+import Modal from "./Modal.vue";
+import { usePhotoStore } from "../store/index";
 export default {
   data() {
     return {
-      count: "28",
-      client_id: "QaxOLYJFNjV5katlAPBXlpedw2R2Ovti2SKbFZEI4RU",
+      showModal: false,
       images: [],
+      image: [],
+      isLoading: false,
     };
   },
   methods: {
+    toModal(image) {
+      this.showModal = true;
+      this.image = image;
+    },
     async fetchData() {
       try {
-        const response = await axios({
-          method: "get",
-          url: "https://api.unsplash.com/photos/random",
-          params: {
-            count: this.count,
-            client_id: this.client_id,
-          },
-        });
-        this.images = response.data;
+        this.isLoading = true;
+        await usePhotoStore.fetchData();
+        this.images = usePhotoStore.images;
       } catch (error) {
-        alert(error);
+        console.error("Error fetching data:", error);
+      } finally {
+        this.isLoading = false;
       }
     },
   },
   mounted() {
     this.fetchData();
   },
+  components: { Modal },
 };
 </script>
 
@@ -46,7 +56,7 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   grid-auto-rows: 25rem;
-  /* padding: 1rem; */
+  position: relative;
 }
 
 .imaage-box {
@@ -55,20 +65,6 @@ export default {
   height: 100%;
   position: relative;
   transition: 0.4s;
-
-  /* &:hover {
-      transform: scale(0.95);
-      
-      .photoBox {
-         transform: scale(1.2);
-      }
-      
-      a {
-         transition: 0.3s;
-         bottom: 3%;
-         right: 3%;
-      }
-   } */
 }
 
 .image {
