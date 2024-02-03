@@ -18,7 +18,7 @@ export const usePhotoStore = defineStore({
                   url: "https://api.unsplash.com/photos/random/",
                   params: {
                      count: 28,
-                     client_id: '5L7IgPO9W3WngJMhAa31bAes8r0gRoijpKnukBk2VHk',
+                     client_id: 'coqmge2ykQgYjS7v1EqICeFAOZNxpAFi6x34bOOms4g',
                   },
                }
             );

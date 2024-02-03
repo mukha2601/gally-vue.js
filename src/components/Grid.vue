@@ -15,32 +15,18 @@
 
 <script>
 import Modal from "./Modal.vue";
-import { usePhotoStore } from "../store/index";
 
 export default {
   components: { Modal },
   data() {
     return {
       showModal: false,
-      selectedImage: {},
-      images: [],
       image: [],
     };
   },
-  mounted() {
-    const photoStore = usePhotoStore();
-    this.fetchData();
-  },
+  props: ["images"],
+
   methods: {
-    async fetchData() {
-      const photoStore = usePhotoStore();
-      try {
-        await photoStore.fetchData(); // store ichidagi fetchData() ni chaqirish
-        this.images = photoStore.images; // Store dan olingan rasm ma'lumotlarini o'zlashtirish
-      } catch (error) {
-        console.error("Rasm ma'lumotlarini olishda xatolik:", error);
-      }
-    },
     toModal(image) {
       this.showModal = true;
       this.image = image;
