@@ -1,5 +1,5 @@
 <template>
-  <Modal v-if="showModal" :image="image" @closeModal="showModal = false" />
+  <!-- <Modal v-if="showModal" :image="image" @closeModal="showModal = false" /> -->
   <div class="grid">
     <div v-for="image in images" class="imaage-box">
       <img
@@ -13,9 +13,8 @@
   </div>
 </template>
 
-<script>
+<!-- <script>
 import Modal from "./Modal.vue";
-import { usePhotoStore } from "../store/index";
 export default {
   data() {
     return {
@@ -30,23 +29,34 @@ export default {
       this.showModal = true;
       this.image = image;
     },
-    async fetchData() {
-      try {
-        this.isLoading = true;
-        await usePhotoStore.fetchData();
-        this.images = usePhotoStore.images;
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        this.isLoading = false;
-      }
-    },
-  },
-  mounted() {
-    this.fetchData();
   },
   components: { Modal },
 };
+</script> -->
+
+<script setup>
+import { ref } from "vue";
+import Modal from "./Modal.vue";
+import { usePhotoStore } from "../store/index";
+
+const showModal = ref(false);
+// const selectedImage = ref({});
+const photoStore = usePhotoStore(); // Store ni ishlatish uchun
+const toModal = (image) => {
+  showModal.value = true;
+  selectedImage.value = image;
+};
+
+const fetchData = async () => {
+  try {
+    await photoStore.fetchData(); // store ichidagi fetchData() ni chaqirish
+  } catch (error) {
+    console.error("Rasm ma'lumotlarini olishda xatolik:", error);
+  }
+};
+
+// fetchData() metodini chaqirib, ma'lumotlarni olib kelish
+fetchData();
 </script>
 
 <style scoped>

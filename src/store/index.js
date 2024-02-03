@@ -3,22 +3,21 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 
 export const usePhotoStore = defineStore({
-   id: 'photo',
+   id: 'images',
    state: () => ({
-      count: 28,
-      client_id: 'QaxOLYJFNjV5katlAPBXlpedw2R2Ovti2SKbFZEI4RU',
-      images: [] // Rasm ma'lumotlarini saqlash uchun massiv
+      images: []
    }),
+
    actions: {
       async fetchData() {
          try {
-            const response = await axios.get(
+            const response = await axios(
                {
                   method: "get",
-                  url: "https://api.unsplash.com/photos/random",
+                  url: "https://api.unsplash.com/photos/random/",
                   params: {
-                     count: this.count,
-                     client_id: this.client_id,
+                     count: 28,
+                     client_id: '5L7IgPO9W3WngJMhAa31bAes8r0gRoijpKnukBk2VHk',
                   },
                }
             );
