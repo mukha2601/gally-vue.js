@@ -1,6 +1,6 @@
 <script>
 import Grid from "../components/Grid.vue";
-import { usePhotoStore } from "../store/index";
+import products from "../data/index";
 
 export default {
   components: {
@@ -8,26 +8,20 @@ export default {
   },
   data() {
     return {
-      images: [],
+      products: [],
     };
   },
   mounted() {
-    this.fetchData();
+    this.getData();
   },
   methods: {
-    async fetchData() {
-      const photoStore = usePhotoStore();
-      try {
-        await photoStore.fetchData(); // store ichidagi fetchData() ni chaqirish
-        this.images = photoStore.images; // Store dan olingan rasm ma'lumotlarini o'zlashtirish
-      } catch (error) {
-        console.error("Rasm ma'lumotlarini olishda xatolik:", error);
-      }
+    getData() {
+      this.products = products;
     },
   },
 };
 </script>
 
 <template>
-  <Grid :images="images" />
+  <Grid :products="products" />
 </template>
