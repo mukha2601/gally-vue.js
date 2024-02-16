@@ -13,6 +13,10 @@
 import { useModal } from "../store/index";
 import { mapWritableState } from "pinia";
 export default {
+  data() {
+    return {
+    };
+  },
   props: {
     image: {
       type: Object,
@@ -26,6 +30,11 @@ export default {
 </script>
 
 <style scoped>
+.card {
+  border: 2px solid black;
+  padding: 5px;
+  margin-top: 10px;
+}
 .modal-box {
   width: 100%;
   height: 100vh;
@@ -39,9 +48,28 @@ export default {
 }
 
 .modal {
+  min-width: 400px;
+  height: 90%;
   display: flex;
   flex-direction: column;
   padding: 50px;
-  background-color: aqua;
+  background-color: bisque;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 5px 10px;
+}
+
+.card-input {
+  display: flex;
+}
+
+.btnOk {
+  margin-top: 10px;
 }
 </style>

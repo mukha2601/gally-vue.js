@@ -1,14 +1,14 @@
 <template>
   <Modal v-if="showModal" :image="image" />
+
   <div class="grid">
-    <div v-for="image in images" class="imaage-box">
-      <img
-        :src="image.urls.small"
-        alt=""
-        :key="image.id"
-        class="image"
-        @click="toModal(image)"
-      />
+    <div v-for="product in products" class="imaage-box">
+      <img :src="product.image" alt="" :key="product.id" class="image" />
+      <h1>{{ product.name }}</h1>
+      <p>
+        <del>{{ product.old_price }}</del> | {{ product.price }} UZS
+      </p>
+      <button @click="getLocalStoroge(product, product.id)">olish</button>
     </div>
   </div>
 </template>
@@ -17,6 +17,7 @@
 import { useModal } from "../store/index";
 import { mapWritableState } from "pinia";
 import Modal from "./Modal.vue";
+import useCounterStore from "../store/index";
 
 export default {
   components: { Modal },
@@ -29,10 +30,36 @@ export default {
   computed: {
     ...mapWritableState(useModal, ["showModal"]),
   },
+
   methods: {
-    toModal(image) {
+    increment() {
+      this.counter.increment();
+    },
+    toModal(product) {
       this.showModal = true;
-      this.image = image;
+      this.product = product;
+    },
+    getLocalStoroge(product, id) {
+      let productsInStorage = localStorage.getItem("products");
+      let productsArray = productsInStorage
+        ? JSON.parse(productsInStorage)
+        : [];
+
+      let found = false;
+
+      productsArray.forEach((item) => {
+        if (item.id === id) {
+          item.count += 1;
+          this.productCounter.productCount++;
+          found = true;
+        }
+      });
+
+      if (!found) productsArray.push(product);
+
+      localStorage.setItem("products", JSON.stringify(productsArray));
+      this.counter.savedCount = productsArray.length;
+      this.locStorArray = productsArray;
     },
   },
 };
@@ -46,6 +73,7 @@ export default {
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   grid-auto-rows: 15rem;
   position: relative;
+  gap: 1rem;
 }
 
 .imaage-box {
@@ -58,7 +86,37 @@ export default {
 
 .image {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
+}
+
+h1,
+p {
+  color: white;
+}
+
+.imaage-box button {
+  margin-top: 1rem;
+  padding: 4px 8px;
+}
+
+.saved-box {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.saved-box button {
+  margin: 0.5rem;
+  padding: 0 1rem;
+  border: none;
+}
+
+button:hover {
+  color: white;
+  background-color: black;
+  border: 1px solid white;
 }
 </style>

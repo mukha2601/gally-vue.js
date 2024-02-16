@@ -4,7 +4,7 @@
 
 <script>
 import Grid from "../components/Grid.vue";
-import { usePhotoStore } from "../store/index";
+import products from "../data/index";
 
 export default {
   components: {
