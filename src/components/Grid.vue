@@ -1,5 +1,5 @@
 <template>
-  <Modal v-if="showModal" :image="image" @closeModal="showModal = false" />
+  <Modal v-if="showModal" :image="image" />
   <div class="grid">
     <div v-for="image in images" class="imaage-box">
       <img
@@ -14,18 +14,21 @@
 </template>
 
 <script>
+import { useModal } from "../store/index";
+import { mapWritableState } from "pinia";
 import Modal from "./Modal.vue";
 
 export default {
   components: { Modal },
   data() {
     return {
-      showModal: false,
       image: [],
     };
   },
   props: ["images"],
-
+  computed: {
+    ...mapWritableState(useModal, ["showModal"]),
+  },
   methods: {
     toModal(image) {
       this.showModal = true;
@@ -40,8 +43,8 @@ export default {
   width: 100%;
   height: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
-  grid-auto-rows: 25rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-auto-rows: 15rem;
   position: relative;
 }
 

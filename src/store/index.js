@@ -30,3 +30,10 @@ export const usePhotoStore = defineStore({
    },
 });
 
+
+export const useModal = defineStore({
+   id: 'modal',
+   state: () => ({
+      showModal: false,
+   }),
+})

@@ -2,7 +2,7 @@
   <teleport to="#modal">
     <div class="modal-box">
       <div class="modal">
-        <button @click="closeModal">x</button>
+        <button @click="showModal = false">x</button>
         <img :src="image.urls.small" alt="" :key="image.id" />
       </div>
     </div>
@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import { useModal } from "../store/index";
+import { mapWritableState } from "pinia";
 export default {
   props: {
     image: {
@@ -17,12 +19,9 @@ export default {
       required: true,
     },
   },
-  methods: {
-    closeModal() {
-      this.$emit("closeModal");
-    },
+  computed: {
+    ...mapWritableState(useModal, ["showModal"]),
   },
-  emits: ["closeModal"],
 };
 </script>
 
