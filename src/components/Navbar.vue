@@ -47,12 +47,6 @@ input {
   width: 400px;
 }
 
-button {
-  margin: 0.5rem;
-  padding: 0 1rem;
-  border: none;
-}
-
 button:hover {
   color: white;
   background-color: black;
