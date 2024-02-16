@@ -1,7 +1,11 @@
 <template>
   <div class="navbar">
-    <input type="text" v-model="searchText" />
-    <button type="button" @click="searchPhotos">Search</button>
+    <!-- <div class="logo"><h1>logo</h1></div> -->
+
+    <div class="search-box">
+      <input type="text" v-model="searchText" />
+      <button type="button" @click="searchPhotos">Search</button>
+    </div>
   </div>
 </template>
 
@@ -18,9 +22,11 @@ export default {
   methods: {
     async searchPhotos() {
       try {
-        const response = await axios.get("https://api.unsplash.com/photos/", {
+        const response = await axios({
+          method: "get",
+          url: "https://api.unsplash.com/photos/random/",
           params: {
-            count: 28,
+            count: 30,
             query: this.searchText, // Foydalanuvchi kiritgan matn
             client_id: "coqmge2ykQgYjS7v1EqICeFAOZNxpAFi6x34bOOms4g",
           },
@@ -35,16 +41,30 @@ export default {
 </script>
 
 <style scoped>
+h1 {
+  color: gray;
+}
 .navbar {
   width: 100%;
   height: 50px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 1rem;
+  z-index: 2;
+  backdrop-filter: blur(1rem);
   margin-bottom: 1rem;
 }
 
+.search-box {
+  display: flex;
+  gap: 0.1rem;
+  width: 32.2rem;
+}
+
 input {
-  width: 400px;
+  width: 100%;
+  padding: 0 1rem;
 }
 
 button:hover {

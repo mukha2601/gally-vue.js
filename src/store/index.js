@@ -14,10 +14,9 @@ export const usePhotoStore = defineStore({
             const response = await axios(
                {
                   method: "get",
-                  baseURL: 'https://api.unsplash.com/photos/',
                   url: "https://api.unsplash.com/photos/random/",
                   params: {
-                     count: 28,
+                     count: 30,
                      client_id: 'coqmge2ykQgYjS7v1EqICeFAOZNxpAFi6x34bOOms4g',
                   },
                }

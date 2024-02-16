@@ -46,6 +46,7 @@ export default {
   grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   grid-auto-rows: 15rem;
   position: relative;
+  gap: 0.2rem;
 }
 
 .imaage-box {
