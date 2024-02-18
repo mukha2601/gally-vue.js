@@ -11,6 +11,9 @@
       />
     </div>
   </div>
+  <div class="showMore-box" v-if="this.images.length">
+    <button class="showMoreBtn" @click="showMore">show more</button>
+  </div>
 </template>
 
 <script>
@@ -34,11 +37,25 @@ export default {
       this.showModal = true;
       this.image = image;
     },
+    showMore() {},
   },
 };
 </script>
 
 <style scoped>
+.showMore-box {
+  margin-top: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.showMoreBtn {
+  padding: 1rem 2rem;
+  display: flex;
+  background-color: white;
+  width: fit-content;
+  cursor: pointer;
+}
 .grid {
   width: 100%;
   height: auto;

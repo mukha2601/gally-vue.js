@@ -5,7 +5,8 @@ import axios from 'axios';
 export const usePhotoStore = defineStore({
    id: 'images',
    state: () => ({
-      images: []
+      images: [],
+      page: 1
    }),
 
    actions: {
@@ -16,6 +17,7 @@ export const usePhotoStore = defineStore({
                   method: "get",
                   url: "https://api.unsplash.com/photos/random/",
                   params: {
+                     page: this.page,
                      count: 30,
                      client_id: 'coqmge2ykQgYjS7v1EqICeFAOZNxpAFi6x34bOOms4g',
                   },

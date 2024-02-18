@@ -24,14 +24,19 @@ export default {
       try {
         const response = await axios({
           method: "get",
-          url: "https://api.unsplash.com/photos/random/",
+          url: "https://api.unsplash.com/search/photos",
           params: {
-            count: 30,
+            per_page: 30,
             query: this.searchText, // Foydalanuvchi kiritgan matn
             client_id: "coqmge2ykQgYjS7v1EqICeFAOZNxpAFi6x34bOOms4g",
           },
         });
-        usePhotoStore().images = response.data; // Ma'lumotlarni o'zgartiramiz
+        console.log(response.data.results);
+        usePhotoStore().images = [
+          ...usePhotoStore().images,
+          ...response.data.results,
+        ]; // Ma'lumotlarni o'zgartiramiz
+        // usePhotoStore().images = response.data.results; // Ma'lumotlarni o'zgartiramiz
       } catch (error) {
         console.error("Rasm ma'lumotlarini qidirishda xatolik:", error);
       }
