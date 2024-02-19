@@ -14,5 +14,6 @@ import Navbar from "./components/Navbar.vue";
 .container {
   max-width: 1600px;
   padding: 1rem;
+  margin: auto;
 }
 </style>

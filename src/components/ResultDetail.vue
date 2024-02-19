@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { usePhotoStore, useModal } from "../store/index";
+import { useSearchPhotos, useModal } from "../store/index";
 import { mapWritableState } from "pinia";
 import Modal from "./Modal.vue";
 
@@ -31,12 +31,13 @@ export default {
   props: ["images"],
   computed: {
     ...mapWritableState(useModal, ["showModal"]),
-    ...mapWritableState(usePhotoStore, ["page"]),
+    ...mapWritableState(useSearchPhotos, ["page"]),
+    ...mapWritableState(useSearchPhotos, ["searchText"]),
   },
   methods: {
     showMore() {
       this.page++;
-      usePhotoStore().fetchData();
+      useSearchPhotos().searchPhotosData();
     },
   },
 };

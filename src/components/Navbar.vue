@@ -1,45 +1,29 @@
 <template>
   <div class="navbar">
-    <!-- <div class="logo"><h1>logo</h1></div> -->
+    <div class="logo"><h1>logo</h1></div>
 
     <div class="search-box">
-      <input type="text" v-model="searchText" />
+      <input type="text" v-model="this.searchText" />
       <button type="button" @click="searchPhotos">Search</button>
     </div>
   </div>
 </template>
 
 <script>
-import { usePhotoStore } from "../store/index";
-import axios from "axios";
+import { useSearchPhotos } from "../store/index";
+// import axios from "axios";
+import { mapWritableState } from "pinia";
 
 export default {
   data() {
-    return {
-      searchText: "",
-    };
+    return {};
+  },
+  computed: {
+    ...mapWritableState(useSearchPhotos, ["searchText"]),
   },
   methods: {
-    async searchPhotos() {
-      try {
-        const response = await axios({
-          method: "get",
-          url: "https://api.unsplash.com/search/photos",
-          params: {
-            per_page: 30,
-            query: this.searchText, // Foydalanuvchi kiritgan matn
-            client_id: "coqmge2ykQgYjS7v1EqICeFAOZNxpAFi6x34bOOms4g",
-          },
-        });
-        console.log(response.data.results);
-        usePhotoStore().images = [
-          ...usePhotoStore().images,
-          ...response.data.results,
-        ]; // Ma'lumotlarni o'zgartiramiz
-        // usePhotoStore().images = response.data.results; // Ma'lumotlarni o'zgartiramiz
-      } catch (error) {
-        console.error("Rasm ma'lumotlarini qidirishda xatolik:", error);
-      }
+    searchPhotos() {
+      this.$router.push("/result");
     },
   },
 };

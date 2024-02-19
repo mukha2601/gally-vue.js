@@ -10,7 +10,6 @@ export default {
   components: {
     Grid,
   },
-
   computed: {
     images() {
       return usePhotoStore().images;
