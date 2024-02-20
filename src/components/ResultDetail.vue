@@ -12,7 +12,10 @@
     </div>
   </div>
   <div class="showMore-box" v-if="this.images.length">
-    <button class="showMoreBtn" @click="showMore">show more</button>
+    <button class="showMoreBtn" @click="showMore">
+      show more
+      <Icon icon="line-md:chevron-down" width="1.2em" height="1.2em" />
+    </button>
   </div>
 </template>
 
@@ -35,6 +38,10 @@ export default {
     ...mapWritableState(useSearchPhotos, ["searchText"]),
   },
   methods: {
+    toModal(image) {
+      this.image = image;
+      this.showModal = true;
+    },
     showMore() {
       this.page++;
       useSearchPhotos().searchPhotosData();

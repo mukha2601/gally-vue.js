@@ -34,6 +34,10 @@ export default {
     ...mapWritableState(usePhotoStore, ["page"]),
   },
   methods: {
+    toModal(image) {
+      this.image = image;
+      this.showModal = true;
+    },
     showMore() {
       this.page++;
       usePhotoStore().fetchData();

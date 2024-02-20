@@ -1,28 +1,39 @@
 <template>
   <div class="navbar">
-    <div class="logo"><h1>logo</h1></div>
+    <router-link to="/">
+      <div class="logo"><h1>logo</h1></div>
+    </router-link>
 
     <div class="search-box">
-      <input type="text" v-model="this.searchText" />
-      <button type="button" @click="searchPhotos">Search</button>
+      <input
+        type="text"
+        v-model="this.searchText"
+        @keyup.enter="searchPhotos"
+      />
+      <button type="button" @click="searchPhotos">
+        <Icon icon="line-md:search" width="1.4rem" />
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import { useSearchPhotos } from "../store/index";
-// import axios from "axios";
 import { mapWritableState } from "pinia";
+import { RouterLink } from "vue-router";
+import { Icon } from "@iconify/vue";
 
 export default {
-  data() {
-    return {};
+  components: {
+    Icon,
   },
   computed: {
     ...mapWritableState(useSearchPhotos, ["searchText"]),
   },
   methods: {
     searchPhotos() {
+      useSearchPhotos().searchPhotos = [];
+      useSearchPhotos().searchPhotosData();
       this.$router.push("/result");
     },
   },
@@ -54,11 +65,20 @@ h1 {
 input {
   width: 100%;
   padding: 0 1rem;
+  outline: none;
+}
+
+button {
+  width: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 0;
 }
 
 button:hover {
   color: white;
   background-color: black;
-  border: 1px solid white;
 }
 </style>

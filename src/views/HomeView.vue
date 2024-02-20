@@ -1,14 +1,14 @@
 <template>
-  <Grid :images="images" />
+  <HomeDetail :images="images" />
 </template>
 
 <script>
-import Grid from "../components/Grid.vue";
+import HomeDetail from "../components/HomeDetail.vue";
 import { usePhotoStore } from "../store/index";
 
 export default {
   components: {
-    Grid,
+    HomeDetail,
   },
   computed: {
     images() {
