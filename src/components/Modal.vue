@@ -5,7 +5,7 @@
         <img :src="image.urls.regular" alt="" :key="image.id" />
         <div class="wrapper">
           <button @click="downImg(image.urls.full)">
-            <Icon icon="material-symbols:download" width="1.2rem" />
+            <Icon icon="iconoir:download" width="1.2rem" />
           </button>
           <button @click="showModal = false">
             <Icon icon="heroicons:x-mark-20-solid" width="1.2rem" />
@@ -83,7 +83,6 @@ img {
 .wrapper {
   width: 100%;
   display: flex;
-  /* position: absolute; */
   bottom: 0;
   justify-content: center;
 }

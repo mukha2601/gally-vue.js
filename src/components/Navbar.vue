@@ -1,12 +1,15 @@
 <template>
   <div class="navbar">
     <router-link to="/">
-      <div class="logo"><h1>logo</h1></div>
+      <div class="logo">
+        <Icon icon="line-md:external-link" width="1.5rem" />
+      </div>
     </router-link>
 
     <div class="search-box">
       <input
         type="text"
+        placeholder="image search"
         v-model="this.searchText"
         @keyup.enter="searchPhotos"
       />
@@ -41,8 +44,14 @@ export default {
 </script>
 
 <style scoped>
-h1 {
-  color: gray;
+.logo {
+  width: 4rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 1px solid gray;
+  color: white;
 }
 .navbar {
   width: 100%;
@@ -58,7 +67,6 @@ h1 {
 
 .search-box {
   display: flex;
-  gap: 0.1rem;
   width: 32.2rem;
 }
 
@@ -66,6 +74,10 @@ input {
   width: 100%;
   padding: 0 1rem;
   outline: none;
+  color: black;
+  border: 0;
+  border-radius: 0;
+  background-color: rgba(255, 255, 255, 0.326);
 }
 
 button {
@@ -75,6 +87,7 @@ button {
   justify-content: center;
   border: 0;
   border-radius: 0;
+  background-color: rgba(255, 255, 255, 0.326);
 }
 
 button:hover {

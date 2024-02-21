@@ -56,9 +56,16 @@ export default {
 .showMoreBtn {
   padding: 1rem 2rem;
   display: flex;
-  background-color: white;
+  background-color: transparent;
   width: fit-content;
   cursor: pointer;
+  border: 1px solid gray;
+  color: gray;
+}
+
+.showMoreBtn:hover {
+  background-color: gray;
+  color: black;
 }
 .grid {
   width: 100%;
