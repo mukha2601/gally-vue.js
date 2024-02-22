@@ -71,4 +71,5 @@ export const useModal = defineStore({
    state: () => ({
       showModal: false,
    }),
+
 })

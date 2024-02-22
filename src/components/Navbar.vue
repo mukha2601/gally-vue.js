@@ -67,7 +67,7 @@ export default {
 
 .search-box {
   display: flex;
-  width: 32.2rem;
+  width: 30rem;
 }
 
 input {

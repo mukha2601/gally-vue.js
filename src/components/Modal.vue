@@ -1,8 +1,16 @@
 <template>
   <teleport to="#modal">
     <div class="modal-box">
-      <div class="modal">
-        <img :src="image.urls.regular" alt="" :key="image.id" />
+      <div v-show="this.isLoading" class="load">
+        <Icon icon="svg-spinners:blocks-wave" width="3rem" height="3rem" />
+      </div>
+      <div class="modal" v-show="this.isLoading == false">
+        <img
+          :src="image.urls.regular"
+          alt=""
+          :key="image.id"
+          @load="imageLoaded"
+        />
         <div class="wrapper">
           <button @click="downImg(image.urls.full)">
             <Icon icon="iconoir:download" width="1.2rem" />
@@ -20,7 +28,13 @@
 import { useModal } from "../store/index";
 import { mapWritableState } from "pinia";
 import { Icon } from "@iconify/vue";
+
 export default {
+  data() {
+    return {
+      isLoading: true, // Initially, set loading to true
+    };
+  },
   components: {
     Icon,
   },
@@ -30,8 +44,12 @@ export default {
       required: true,
     },
   },
+
   computed: {
     ...mapWritableState(useModal, ["showModal"]),
+    imageLoaded() {
+      this.isLoading = false;
+    },
   },
   methods: {
     downImg(imgUrl) {
@@ -50,6 +68,11 @@ export default {
 </script>
 
 <style scoped>
+.load {
+  z-index: 99;
+  color: white;
+  font-size: 50px;
+}
 .modal-box {
   width: 100%;
   height: 100vh;
