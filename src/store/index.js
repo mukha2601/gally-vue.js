@@ -70,6 +70,7 @@ export const useModal = defineStore({
    id: 'modal',
    state: () => ({
       showModal: false,
+      isLoading: true,
    }),
 
 })

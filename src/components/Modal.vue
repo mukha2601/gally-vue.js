@@ -1,21 +1,21 @@
 <template>
   <teleport to="#modal">
     <div class="modal-box">
-      <div v-show="this.isLoading" class="load">
+      <div v-show="isLoading" class="load">
         <Icon icon="svg-spinners:blocks-wave" width="3rem" height="3rem" />
       </div>
-      <div class="modal" v-show="this.isLoading == false">
+      <div class="modal" v-show="isLoading == false">
         <img
           :src="image.urls.regular"
           alt=""
           :key="image.id"
-          @load="imageLoaded"
+          @load="isLoading = false"
         />
         <div class="wrapper">
           <button @click="downImg(image.urls.full)">
             <Icon icon="iconoir:download" width="1.2rem" />
           </button>
-          <button @click="showModal = false">
+          <button @click="(showModal = false), (isLoading = true)">
             <Icon icon="heroicons:x-mark-20-solid" width="1.2rem" />
           </button>
         </div>
@@ -30,11 +30,6 @@ import { mapWritableState } from "pinia";
 import { Icon } from "@iconify/vue";
 
 export default {
-  data() {
-    return {
-      isLoading: true, // Initially, set loading to true
-    };
-  },
   components: {
     Icon,
   },
@@ -47,9 +42,7 @@ export default {
 
   computed: {
     ...mapWritableState(useModal, ["showModal"]),
-    imageLoaded() {
-      this.isLoading = false;
-    },
+    ...mapWritableState(useModal, ["isLoading"]),
   },
   methods: {
     downImg(imgUrl) {
