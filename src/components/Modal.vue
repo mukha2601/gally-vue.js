@@ -2,7 +2,7 @@
   <teleport to="#modal">
     <div class="modal-box">
       <div v-show="isLoading" class="load">
-        <Icon icon="svg-spinners:blocks-wave" width="3rem" height="3rem" />
+        <Icon icon="svg-spinners:bars-fade" width="3rem" height="3rem" />
       </div>
       <div class="modal" v-show="isLoading == false">
         <img

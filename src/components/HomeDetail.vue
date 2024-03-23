@@ -8,7 +8,6 @@
         :key="image.id"
         class="image"
         @click="toModal(image)"
-        @load=""
       />
     </div>
   </div>

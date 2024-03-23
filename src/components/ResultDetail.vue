@@ -12,10 +12,7 @@
     </div>
   </div>
   <div class="showMore-box" v-if="this.images.length">
-    <button class="showMoreBtn" @click="showMore">
-      show more
-      <Icon icon="line-md:chevron-down" width="1.2em" height="1.2em" />
-    </button>
+    <button class="showMoreBtn" @click="showMore">show more</button>
   </div>
 </template>
 
